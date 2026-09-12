@@ -1,0 +1,16 @@
+# Render Blueprint: New → Blueprint → pick this repo → Apply
+services:
+  - type: web
+    name: aklx-craft
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free          # sleeps after ~15 min idle; "starter" = always on
+    region: virginia    # close to DonutSMP (US); "frankfurt" for EU servers
+    healthCheckPath: /config.json
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MAX_CONNECTIONS_PER_IP
+        value: "5"
